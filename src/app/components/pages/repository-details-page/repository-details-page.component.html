@@ -1,0 +1,52 @@
+<nz-card [nzActions]="(isRepoSaved$ | async) ? [actionRemove] : [actionSave]">
+  <nz-skeleton
+    [nzActive]="true"
+    [nzLoading]="!(repository$ | async)"
+    [nzAvatar]="{ size: 'large' }"
+  >
+    <nz-card-meta
+      [nzAvatar]="avatarTemplate"
+      [nzTitle]="
+        (repository$ | async)?.author + '/' + (repository$ | async)?.name
+      "
+      [nzDescription]="cardDescription"
+    ></nz-card-meta>
+  </nz-skeleton>
+</nz-card>
+<h1 class="built__header" *ngIf="(builtByUsers$ | async)?.length">Built by</h1>
+<app-git-user
+  [user]="user"
+  *ngFor="let user of builtByUsers$ | async"
+></app-git-user>
+<ng-template #cardDescription>
+  <p nzEllipsis nzExpandable>{{ (repository$ | async)?.description }}</p>
+  <div class="repo-info">
+    <div>
+      <i nz-icon nzType="star" nzTheme="outline"></i>
+      {{ (repository$ | async)?.stars }}
+    </div>
+    <nz-badge
+      [nzText]="(repository$ | async)?.language"
+      [nzColor]="(repository$ | async)?.languageColor"
+    ></nz-badge>
+  </div>
+</ng-template>
+<ng-template #avatarTemplate>
+  <nz-avatar
+    nzShape="square"
+    [nzSize]="96"
+    [nzSrc]="(repository$ | async)?.avatar"
+  ></nz-avatar>
+</ng-template>
+<ng-template #actionSave>
+  <button nz-button nzType="primary" nzGhost (click)="saveRepository()">
+    <i nz-icon nzType="save"></i>
+    Save
+  </button>
+</ng-template>
+<ng-template #actionRemove>
+  <button nz-button nzType="danger" nzGhost (click)="removeRepository()">
+    <i nz-icon nzType="delete"></i>
+    Remove from saved
+  </button>
+</ng-template>

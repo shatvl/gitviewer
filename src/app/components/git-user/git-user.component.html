@@ -1,0 +1,24 @@
+<nz-card>
+  <nz-skeleton
+    [nzActive]="true"
+    [nzLoading]="!user"
+    [nzAvatar]="{ size: 'large' }"
+  >
+    <nz-card-meta
+      [nzAvatar]="avatarTemplate"
+      [nzTitle]="user?.login"
+      [nzDescription]="cardDescription"
+    ></nz-card-meta>
+  </nz-skeleton>
+</nz-card>
+<ng-template #cardDescription>
+  <div>Followers: {{ user?.followers }}</div>
+  <div>Following: {{ user?.following }}</div>
+</ng-template>
+<ng-template #avatarTemplate>
+  <nz-avatar
+    nzShape="square"
+    [nzSize]="96"
+    [nzSrc]="user?.avatar_url"
+  ></nz-avatar>
+</ng-template>

@@ -1,0 +1,9 @@
+<nz-list
+  [nzDataSource]="repositories$ | async"
+  [nzRenderItem]="item"
+  [nzItemLayout]="'horizontal'"
+>
+  <ng-template #item let-item>
+    <app-repository [repository]="item"></app-repository>
+  </ng-template>
+</nz-list>

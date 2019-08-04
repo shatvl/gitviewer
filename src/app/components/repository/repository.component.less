@@ -1,0 +1,41 @@
+@import 'variables';
+
+nz-list-item {
+  max-width: 620px;
+  margin: 12px auto;
+  padding: 8px 12px;
+  border: 1px solid @border-light-color;
+  border-radius: 4px;
+  box-shadow: @dribble-medium-shadow;
+  overflow: hidden;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  .repo-info__action {
+    min-width: 90px;
+  }
+
+  .repo-info {
+    display: flex;
+    align-items: center;
+
+    nz-badge {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  nz-list-item {
+    padding: 6px 8px;
+
+    .repo-info__action {
+      margin: 12px auto;
+      width: 100%;
+      font-size: 16px;
+      height: 30px;
+    }
+  }
+}

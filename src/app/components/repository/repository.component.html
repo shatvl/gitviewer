@@ -1,0 +1,74 @@
+<nz-list-item
+  [nzContent]="!repository ? '' : repository?.content"
+  [nzActions]="(isSaved$ | async) ? [removeAction] : [saveAction]"
+>
+  <ng-template #removeAction>
+    <button
+      class="repo-info__action"
+      nzGhost
+      nzSize="small"
+      nz-button
+      nzType="danger"
+      (click)="removeRepositoryFromSaved()"
+    >
+      <i nz-icon nzType="delete"></i>Remove
+    </button>
+  </ng-template>
+  <ng-template #saveAction>
+    <button
+      class="repo-info__action"
+      nzGhost
+      nzSize="small"
+      nz-button
+      nzType="primary"
+      (click)="saveRepositoryToStorage()"
+    >
+      <i nz-icon nzType="save"></i>Save
+    </button>
+  </ng-template>
+  <nz-skeleton
+    [nzLoading]="loading$ | async"
+    [nzActive]="true"
+    [nzAvatar]="true"
+  >
+    <nz-list-item-meta
+      [nzAvatar]="nzAvatar"
+      [nzTitle]="nzTitle"
+      [nzDescription]="description"
+    >
+      <ng-template #nzAvatar>
+        <nz-avatar
+          [nzSize]="83"
+          [nzShape]="'square'"
+          [nzSrc]="repository?.avatar"
+        ></nz-avatar>
+      </ng-template>
+      <ng-template #nzTitle>
+        <a [routerLink]="'/trending/' + repository?.name"
+          >{{ repository?.author }}/{{ repository?.name }}</a
+        >
+        <div class="repo-info">
+          <div class="repo-info__stars">
+            <i nz-icon nzType="star" nzTheme="outline"></i>
+            {{ repository?.stars }}
+          </div>
+          <nz-badge
+            [nzText]="repository?.language"
+            [nzColor]="repository?.languageColor"
+          ></nz-badge>
+        </div>
+      </ng-template>
+      <ng-template #description>
+        <p
+          class="repo-info__description"
+          nz-paragraph
+          nzEllipsis
+          nzExpandable
+          [nzEllipsisRows]="2"
+        >
+          {{ repository?.description }}
+        </p>
+      </ng-template>
+    </nz-list-item-meta>
+  </nz-skeleton>
+</nz-list-item>
