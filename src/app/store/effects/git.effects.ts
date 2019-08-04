@@ -87,4 +87,18 @@ export class GitEffects {
       )
     )
   );
+
+  checkExistingRepos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GitActions.receiveGitRepositories.type),
+      mergeMap(({ payload }) =>
+        this.storageService.removeUntrendingFromStorage(payload).pipe(
+          map(() => ({
+            type: GitActions.initSavedRepositoriesRequest.type
+          })),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
 }

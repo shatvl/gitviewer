@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import {
-  retrieveGitRepositories,
-  initSavedRepositoriesRequest
-} from './store/actions/git.actions';
+import { retrieveGitRepositories } from './store/actions/git.actions';
 import { Observable } from 'rxjs';
 import { selectSavedReposCount } from './store/selectors/git.selectors';
 
@@ -22,6 +19,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(retrieveGitRepositories());
-    this.store.dispatch(initSavedRepositoriesRequest());
   }
 }

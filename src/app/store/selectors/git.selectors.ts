@@ -50,7 +50,6 @@ export const selectSavedReposEntities = createSelector(
   selectSavedRepos,
   selectGitRepoEntities(),
   (savedRepoNames, repoEntities) => {
-    console.log(savedRepoNames, repoEntities);
     return savedRepoNames.map(name => _get(repoEntities, name));
   }
 );
