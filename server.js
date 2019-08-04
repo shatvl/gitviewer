@@ -5,6 +5,6 @@ var port = process.env.PORT || 5000;
 
 app = express();
 
-app.use(serveStatic(__dirname + '/dist'));
+app.use(serveStatic(__dirname + '/dist/joinmytriptest'));
 
 app.listen(port);

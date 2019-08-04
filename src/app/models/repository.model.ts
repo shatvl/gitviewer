@@ -4,6 +4,7 @@ export interface Repository {
   author?: string;
   avatar?: string;
   builtBy?: GitUserShortInfo[];
+  content?: string;
   currentPeriodStars?: number;
   description?: string;
   forks?: number;
